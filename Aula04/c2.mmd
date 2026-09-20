@@ -1,0 +1,19 @@
+flowchart TD
+    Manager(["Administrador<br>Cadastra e remove produtos"])
+    Seller(["Vendedor"])
+    Stockist(["Equipe do Estoque<br>Controle de entradas e saidas"])
+
+    subgraph TD["Sistema de Gestão de Vendas"]
+        App["Interface de Vendas"]
+        Backoffice["Painel Administrativo - gerente/estoquista"]
+        Server["API"]
+        Database[("Banco de dados")]
+    end 
+
+
+    Seller --->|envia pedidos| App
+    Manager --->|Gerencia produtos| Backoffice
+    Stockist --->|Atualiza estoque| Backoffice
+    Server --->|Consulta e grava informação| Database
+    App --->|Solicita Operação| Server
+    Backoffice --->|Solicita Operação| Server

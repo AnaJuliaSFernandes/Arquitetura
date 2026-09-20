@@ -1,0 +1,9 @@
+flowchart LR
+ Manager(["Adiministrador<br>Registra e remove produtos"])
+ Seller(["Vendedor"])
+ Stockist(["Equipe de Estoque"])
+ System["Sistema de Gestão de Vendas"]
+
+ Manager -->|Gerencia produtos| System
+ Seller -->|Registra pedidos| System
+ Stockist -->|Controla entrada e saida| System

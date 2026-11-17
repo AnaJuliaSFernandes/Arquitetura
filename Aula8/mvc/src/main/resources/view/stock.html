@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Estoque</title>
+</head>
+
+<body>
+    <header>
+        <h1>Estoque</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Estoque Atual</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Movimentar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="stock : ${stocks}">
+                        <td th:text="${stock.id}"></td>
+                        <td th:text="${stock.product.name}"></td>
+                        <td th:text="${stock.quantity}"></td>
+                        <td>
+                            <form method="POST">
+                                <input type="number" name="amount" min="1" value="1" required>
+                                <button type="submit"
+                                        th:formaction="@{/stock/{id}/in(id=${stock.product.id})}">
+                                    Entrada
+                                </button>
+                                <button type="submit"
+                                        th:formaction="@{/stock/{id}/out(id=${stock.product.id})}">
+                                    Saída
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        Projeto de compreensão do MVC
+    </footer>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Vendas</title>
+</head>
+
+<body>
+    <header>
+        <h1>Vendas</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Novo Pedido</h2>
+            <form th:action="@{/sales}" method="POST">
+                <div>
+                    <label for="productId">Produto:</label>
+                    <select id="productId" name="productId" required>
+                        <option th:each="p : ${products}"
+                                th:value="${p.id}"
+                                th:text="${p.name + ' - R$ ' + p.price}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label for="quantity">Quantidade:</label>
+                    <input id="quantity" type="number" name="quantity" min="1" value="1" required>
+                </div>
+                <button type="submit">Criar pedido</button>
+            </form>
+        </section>
+        <section>
+            <h2>Pedidos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Produto</th>
+                        <th>Qtd</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Fatura</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="sale : ${sales}">
+                        <td th:text="${sale.id}"></td>
+                        <td th:text="${sale.product.name}"></td>
+                        <td th:text="${sale.quantity}"></td>
+                        <td th:text="${sale.total}"></td>
+                        <td th:text="${sale.status}"></td>
+                        <td th:text="${sale.faturaId != null ? sale.faturaId : '-'}"></td>
+                        <td>
+                            <form th:if="${sale.status.name() == 'ABERTO'}"
+                                  th:action="@{/sales/{id}/close(id=${sale.id})}" method="POST">
+                                <button type="submit">Fechar pedido</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        Projeto de compreensão do MVC
+    </footer>
+</body>
+</html>

@@ -1,0 +1,15 @@
+sequenceDiagram
+    actor Usuário
+    participant Controller
+    participant Service
+    participant Repository
+
+    Usuário->>Controller: Solicita entrada ou saída
+    Controller->>Service: increase() ou decrease()
+    Service->>Repository: Busca estoque do produto
+    Repository-->>Service: Dados do estoque
+    Service->>Service: Valida quantidade e status
+    Service->>Repository: Salva estoque atualizado
+    Repository-->>Service: Estoque atualizado
+    Service-->>Controller: Resultado
+    Controller-->>Usuário: Redireciona para estoque

@@ -1,0 +1,14 @@
+flowchart TD
+    Inicio((Início)) --> A[Selecionar produto e quantidade]
+    A --> B{Produto descontinuado?}
+    B -- Sim --> Erro[Impedir movimentação]
+    B -- Não --> C{Quantidade disponível?}
+    C -- Não --> Erro2[Informar estoque insuficiente]
+    C -- Sim --> D[Atualizar quantidade]
+    D --> E{Estoque maior que zero?}
+    E -- Sim --> F[Status DISPONIVEL]
+    E -- Não --> G[Status INDISPONIVEL]
+    F --> Fim((Fim))
+    G --> Fim
+    Erro --> Fim
+    Erro2 --> Fim

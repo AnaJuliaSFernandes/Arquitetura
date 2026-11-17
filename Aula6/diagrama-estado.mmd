@@ -1,0 +1,7 @@
+stateDiagram-v2
+    [*] --> INDISPONIVEL: criação do produto
+    INDISPONIVEL --> DISPONIVEL: estoque recebe quantidade
+    DISPONIVEL --> INDISPONIVEL: estoque chega a zero
+    INDISPONIVEL --> DESCONTINUADO: ADM descontinua
+    DISPONIVEL --> DESCONTINUADO: ADM descontinua
+    DESCONTINUADO --> [*]
